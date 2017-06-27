@@ -5,7 +5,11 @@
   "dependencies": {
     "nodemon": "^1.11.0",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.1",
+    "redux-form": "^6.8.0",
+    "shortid": "^2.2.8"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"

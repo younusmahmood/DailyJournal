@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addTask } from './actions';
+import shortid from 'shortid';
 
-export default class TasksList extends Component {
+class TasksList extends Component {
     constructor(props){
         super(props);
-        
-        this.state = { tasks: [] }
         this.handleClick = this.handleClick.bind(this);
     }
     
     renderTasksList() {
-        return this.state.tasks.map((tasks) => <li className='list-group-item'>{tasks}</li>);                  
+        return this.props.tasks.map((tasks) => <li className='list-group-item tasks' key={shortid.generate()}>{tasks}</li>);          
     }
             
     handleClick(){
-            this.setState({ tasks: this.state.tasks.concat(this.textInput.value)});
+            this.props.addTask(this.textInput.value);
             this.textInput.value = '';
         }
         
@@ -24,7 +25,7 @@ export default class TasksList extends Component {
                 <div className="row">
                    <div className='col-sm-3'>
                         <div className="col-10">
-                            <input className="form-control" type="time" value="07:00:00" id="" />    
+                            <input className="form-control" type="time" value="07:00:00" onChange={()=>{}} id="" />    
                        </div>
                    </div>
                     <div className="col-sm-7">
@@ -39,7 +40,7 @@ export default class TasksList extends Component {
                        {/* Time Placeholder */}      
                    </div>
                     <div className="col-sm-7">
-                        <ul className='list-group'>
+                        <ul className='list-group tasks'>
                            {this.renderTasksList()}
                         </ul>
                     </div>
@@ -51,3 +52,9 @@ export default class TasksList extends Component {
         )
     }
 }
+
+function mapStateToProps(state){
+    return { tasks: state.tasks }
+}
+
+export default connect(mapStateToProps, { addTask })(TasksList);
