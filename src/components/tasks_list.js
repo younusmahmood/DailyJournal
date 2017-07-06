@@ -1,40 +1,50 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTask } from './actions';
+import { reduxForm, Field } from 'redux-form';
 import shortid from 'shortid';
 
+import { addTask } from '../actions';
+
+const renderInput = field => (
+    <div>
+        <input { ...field.input } type={ field.type } value={ field.value } className='form-control' />
+    </div>
+)
+
 class TasksList extends Component {
-    constructor(props){
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
-    }
-    
     renderTasksList() {
-        return this.props.tasks.map((tasks) => <li className='list-group-item tasks' key={shortid.generate()}>{tasks}</li>);          
+//        return _.map(this.props.tasks, task => {
+//                return (<li className='list-group-item tasks' key={shortid.generate()}>{task.task}{task.time}</li>)
+//        }); 
+        
     }
             
-    handleClick(){
-            this.props.addTask(this.textInput.value);
-            this.textInput.value = '';
-        }
+    handleFormSubmit({ task, time }){
+            console.log({ task, time });
+            this.props.addTask({ task, time });
+    }
         
     render() {
-
+        const { handleSubmit, reset } = this.props;
         return (
             <div>
+               <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
                 <div className="row">
                    <div className='col-sm-3'>
                         <div className="col-10">
-                            <input className="form-control" type="time" value="07:00:00" onChange={()=>{}} id="" />    
+                            <Field name='time' component={renderInput} type='time' value="07:00:00" />   
                        </div>
                    </div>
                     <div className="col-sm-7">
-                        <input className='form-control' ref={(thisInput) => {this.textInput = thisInput}} />
+                        <Field name='task' component={renderInput} type="text" value="" />
                     </div>
                     <div className="col-sm-2">
-                          <button onClick={this.handleClick} className='btn btn-outline-primary'>Enter</button>
+                          <button action='submit' className='btn btn-outline-primary' onClick={reset}>Enter</button>
                     </div>
                 </div>
+               </form>
+
                 <div className='row'>
                    <div className='col-sm-3'>
                        {/* Time Placeholder */}      
@@ -52,6 +62,8 @@ class TasksList extends Component {
         )
     }
 }
+
+TasksList = reduxForm({ form: 'tasksList'})(TasksList);
 
 function mapStateToProps(state){
     return { tasks: state.tasks }
