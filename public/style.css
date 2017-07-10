@@ -14,3 +14,7 @@ body {
 .tasks {
     border: none !important;
 }
+
+.btn-col {
+   padding-top: 31px;
+}
