@@ -7,14 +7,18 @@
 }
 
 body {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-weight: 300;
-}
-
-.tasks {
-    border: none !important;
 }
 
 .btn-col {
    padding-top: 31px;
+}
+
+.list-group-item {
+    border: none !important;
+}
+
+#tasks {
+    padding-top: 30px;
 }

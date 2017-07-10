@@ -30,7 +30,7 @@ class TasksList extends Component {
                        <Field name="task" component={renderInput} type='text'></Field>
                    </div>
                    <div className="col-sm-2 btn-col">
-                       <button action='submit' className='btn btn-outline-primary'>Sign Up!</button>
+                       <button action='submit' className='btn btn-outline-primary'>Create</button>
                    </div>
                 </div>
             </form>
