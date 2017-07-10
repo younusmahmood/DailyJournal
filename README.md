@@ -7,3 +7,4 @@ Commits (Things I'm adding for practice, and anything I add along with the code 
 1. React + Component level state
 2. Bootstrap styling with placeholder for adding time
 3. Refactored code to work with redux, instead of component level state
+4. Added reduxForm to handle adding tasks and time
