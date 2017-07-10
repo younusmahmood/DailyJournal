@@ -13,6 +13,8 @@
     "shortid": "^2.2.8"
   },
   "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.1",
     "prettier": "^1.5.2",
     "react-scripts": "1.0.7"
   },
