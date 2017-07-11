@@ -4,6 +4,8 @@ import shortid from 'shortid'
 
 class TasksList extends Component {
   convertTime(time) {
+    if (!time) return time
+
     time = time
       .toString()
       .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time]
@@ -31,8 +33,11 @@ class TasksList extends Component {
           </li>
         </div>
         <div className="col-sm-2">
-          <button action="#" className="btn btn-outline-success">
-            Done
+          <button action="#" className="btn btn-outline-success completed">
+            <span className="fa fa-check" aria-hidden="true" />
+          </button>
+          <button action="#" className="btn btn-outline-danger delete">
+            <span className="fa fa-trash-o" aria-hidden="true" />
           </button>
         </div>
       </div>

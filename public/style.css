@@ -22,3 +22,11 @@ body {
 #tasks {
     padding-top: 30px;
 }
+
+.completed, .delete, .btnAdd {
+    border: none !important;
+}
+
+#textarea{
+ margin-top: 30px;   
+}

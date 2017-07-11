@@ -8,3 +8,4 @@ Commits (Things I'm adding for practice, and anything I add along with the code 
 2. Bootstrap styling with placeholder for adding time
 3. Refactored code to work with redux, instead of component level state
 4. Added reduxForm to handle adding tasks and time
+5. Displays tasks created with proper formatted 12 Hour time
