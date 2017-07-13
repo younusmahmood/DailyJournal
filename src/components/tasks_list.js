@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import shortid from 'shortid'
 
-import { completeTask } from '../actions'
+import * as actions from '../actions'
 
 class TasksList extends Component {
   convertTime(time) {
@@ -41,14 +41,21 @@ class TasksList extends Component {
         <div className="col-sm-2">
           <button
             onClick={() => this.props.completeTask(tasks.id)}
-            className="btn btn-outline-success completed"
+            className={
+              tasks.completed
+                ? 'btn btn-outline-warning completed'
+                : 'btn btn-outline-success open'
+            }
           >
             <span
               className={tasks.completed ? 'fa fa-undo' : 'fa fa-check'}
               aria-hidden="true"
             />
           </button>
-          <button action="#" className="btn btn-outline-danger delete">
+          <button
+            onClick={() => this.props.deleteTask(tasks.id)}
+            className="btn btn-outline-danger delete"
+          >
             <span className="fa fa-trash-o" aria-hidden="true" />
           </button>
         </div>
@@ -69,4 +76,4 @@ function mapStateToProps(state) {
   return { tasks: state.tasks }
 }
 
-export default connect(mapStateToProps, { completeTask })(TasksList)
+export default connect(mapStateToProps, actions)(TasksList)

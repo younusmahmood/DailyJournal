@@ -23,7 +23,7 @@ body {
     padding-top: 30px;
 }
 
-.completed, .delete, .btnAdd {
+.completed, .delete, .btnAdd, .open {
     border: none !important;
 }
 

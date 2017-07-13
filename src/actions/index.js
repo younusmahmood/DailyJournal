@@ -1,4 +1,4 @@
-import { ADD_TASK, COMPLETE_TASK } from './types'
+import { ADD_TASK, COMPLETE_TASK, DELETE_TASK } from './types'
 
 export function addTask({ task, time, completed, id }) {
   return {
@@ -10,6 +10,13 @@ export function addTask({ task, time, completed, id }) {
 export function completeTask(id) {
   return {
     type: COMPLETE_TASK,
+    payload: id
+  }
+}
+
+export function deleteTask(id) {
+  return {
+    type: DELETE_TASK,
     payload: id
   }
 }
