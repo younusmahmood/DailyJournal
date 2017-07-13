@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
+import shortid from 'shortid'
 
 import { addTask } from '../actions'
 
@@ -10,8 +11,10 @@ const renderInput = field =>
   </div>
 
 class TasksList extends Component {
-  handleFormSubmit(formProps) {
-    this.props.addTask(formProps)
+  handleFormSubmit({ task, time }) {
+    let completed = false
+    let id = shortid.generate()
+    this.props.addTask({ task, time, completed, id })
   }
 
   render() {

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import shortid from 'shortid'
 
+import { completeTask } from '../actions'
+
 class TasksList extends Component {
   convertTime(time) {
     if (!time) return time
@@ -29,12 +31,22 @@ class TasksList extends Component {
         </div>
         <div className="col-sm-7">
           <li className="list-group-item">
-            {tasks.task}
+            {tasks.completed
+              ? <s>
+                  {tasks.task}
+                </s>
+              : tasks.task}
           </li>
         </div>
         <div className="col-sm-2">
-          <button action="#" className="btn btn-outline-success completed">
-            <span className="fa fa-check" aria-hidden="true" />
+          <button
+            onClick={() => this.props.completeTask(tasks.id)}
+            className="btn btn-outline-success completed"
+          >
+            <span
+              className={tasks.completed ? 'fa fa-undo' : 'fa fa-check'}
+              aria-hidden="true"
+            />
           </button>
           <button action="#" className="btn btn-outline-danger delete">
             <span className="fa fa-trash-o" aria-hidden="true" />
@@ -57,4 +69,4 @@ function mapStateToProps(state) {
   return { tasks: state.tasks }
 }
 
-export default connect(mapStateToProps)(TasksList)
+export default connect(mapStateToProps, { completeTask })(TasksList)
