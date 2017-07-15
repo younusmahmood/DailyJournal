@@ -22,42 +22,47 @@ class TasksList extends Component {
   }
 
   renderTasksList() {
-    return this.props.tasks.map(tasks =>
-      <div className="row" key={shortid.generate()}>
-        <div className="col-sm-3">
-          <li className="list-group-item">
-            {' '}{this.convertTime(tasks.time)}
-          </li>
-        </div>
-        <div className="col-sm-7">
-          <li className="list-group-item">
-            {tasks.completed
-              ? <s>
-                  {tasks.task}
-                </s>
-              : tasks.task}
-          </li>
-        </div>
-        <div className="col-sm-2">
-          <button
-            onClick={() => this.props.completeTask(tasks.id)}
-            className={
-              tasks.completed
-                ? 'btn btn-outline-warning completed'
-                : 'btn btn-outline-success open'
-            }
-          >
-            <span
-              className={tasks.completed ? 'fa fa-undo' : 'fa fa-check'}
-              aria-hidden="true"
-            />
-          </button>
-          <button
-            onClick={() => this.props.deleteTask(tasks.id)}
-            className="btn btn-outline-danger delete"
-          >
-            <span className="fa fa-trash-o" aria-hidden="true" />
-          </button>
+    return this.props.tasks.sort((a, b) => a.time > b.time).map(tasks =>
+      <div>
+        <div className="row" key={shortid.generate()}>
+          <div className="col-sm-3">
+            <li className="list-group-item">
+              {' '}{this.convertTime(tasks.time)}
+            </li>
+          </div>
+          <div className="col-sm-7">
+            <li className="list-group-item">
+              {tasks.completed
+                ? <s>
+                    {tasks.task}
+                  </s>
+                : tasks.task}
+            </li>
+          </div>
+          <div className="col-sm-2">
+            <button
+              onClick={() => this.props.completeTask(tasks.id)}
+              className={
+                tasks.completed
+                  ? 'btn btn-outline-warning completed'
+                  : 'btn btn-outline-success open'
+              }
+            >
+              <span
+                className={tasks.completed ? 'fa fa-undo' : 'fa fa-check'}
+                aria-hidden="true"
+              />
+            </button>
+            <button className="btn btn-outline-info notes">
+              <span className="fa fa-file-text-o" aria-hidden="true" />
+            </button>
+            <button
+              onClick={() => this.props.deleteTask(tasks.id)}
+              className="btn btn-outline-danger delete"
+            >
+              <span className="fa fa-trash-o" aria-hidden="true" />
+            </button>
+          </div>
         </div>
       </div>
     )
@@ -67,6 +72,13 @@ class TasksList extends Component {
     return (
       <div className="list-group" id="tasks">
         {this.renderTasksList()}
+
+        <div className="row" id="textarea">
+          <div className="col-sm-8 offset-sm-2">
+            <label htmlFor="textarea">Notes:</label>
+            <textarea className="form-control" rows="10" />
+          </div>
+        </div>
       </div>
     )
   }

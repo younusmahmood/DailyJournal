@@ -1,6 +1,6 @@
 .heading {
     font-size: 4rem;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 100;
     padding-bottom: 20px;
     padding-top: 5px;
@@ -8,7 +8,8 @@
 
 body {
     font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
+    background: url("./concrete-texture.png") center center;
 }
 
 .btn-col {
@@ -20,13 +21,18 @@ body {
 }
 
 #tasks {
-    padding-top: 30px;
+    padding-top: 30px
 }
 
-.completed, .delete, .btnAdd, .open {
+#tasks li {
+    background: none;
+}
+
+.completed, .delete, .btnAdd, .open, .notes {
     border: none !important;
 }
 
 #textarea{
  margin-top: 30px;   
 }
+

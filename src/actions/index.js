@@ -1,9 +1,9 @@
 import { ADD_TASK, COMPLETE_TASK, DELETE_TASK } from './types'
 
-export function addTask({ task, time, completed, id }) {
+export function addTask({ task, time, completed, id, notes }) {
   return {
     type: ADD_TASK,
-    payload: { task, time, completed, id }
+    payload: { task, time, completed, id, notes }
   }
 }
 

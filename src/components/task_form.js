@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { reduxForm, Field } from 'redux-form'
+import { reduxForm, Field, reset } from 'redux-form'
 import shortid from 'shortid'
 
 import { addTask } from '../actions'
@@ -8,13 +8,20 @@ import { addTask } from '../actions'
 const renderInput = field =>
   <div>
     <input {...field.input} type={field.type} className="form-control" />
+    {field.meta.touched &&
+      field.meta.error &&
+      <div className="error">
+        {field.meta.error}
+      </div>}
   </div>
 
 class TasksList extends Component {
   handleFormSubmit({ task, time }) {
     let completed = false
     let id = shortid.generate()
-    this.props.addTask({ task, time, completed, id })
+    let notes = ''
+    this.props.addTask({ task, time, completed, id, notes })
+    this.props.dispatch(reset('tasksList'))
   }
 
   render() {
@@ -41,6 +48,16 @@ class TasksList extends Component {
   }
 }
 
-TasksList = reduxForm({ form: 'tasksList' })(TasksList)
+function validate(formProps) {
+  const errors = {}
+
+  if (!formProps.task) {
+    errors.task = '  '
+  }
+
+  return errors
+}
+
+TasksList = reduxForm({ form: 'tasksList', validate })(TasksList)
 
 export default connect(null, { addTask })(TasksList)
