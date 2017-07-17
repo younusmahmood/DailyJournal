@@ -53,9 +53,6 @@ class TasksList extends Component {
                 aria-hidden="true"
               />
             </button>
-            <button className="btn btn-outline-info notes">
-              <span className="fa fa-file-text-o" aria-hidden="true" />
-            </button>
             <button
               onClick={() => this.props.deleteTask(tasks.id)}
               className="btn btn-outline-danger delete"

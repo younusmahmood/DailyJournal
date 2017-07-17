@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 
-export default class Notes extends Component {
+class Home extends Component {
   render() {
     return <div />
   }
 }
+
+export default Home
