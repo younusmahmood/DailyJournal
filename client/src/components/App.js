@@ -15,10 +15,6 @@ function getDate() {
 
 class App extends Component {
 
-  componentWillMount(){
-    this.props.getTasks()
-  }
-
   render() {
     return (
       <div>

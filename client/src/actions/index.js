@@ -7,9 +7,10 @@ import {
   GET_TASKS
 } from "./types";
 
+
 const ROOT_URL = "http://localhost:3000";
 
-export function addTask({ task, time, completed, id, notes }) {
+export function addTask({ task, time, completed, notes }) {
 
     return function(dispatch) {
         axios.post(`${ROOT_URL}/taskslist`, { task, time })
@@ -17,10 +18,11 @@ export function addTask({ task, time, completed, id, notes }) {
                 task = res.data.task
                 time = res.data.time
                 completed = res.data.completed
-                
+                var _id= res.data._id
+
                 dispatch({
                     type: ADD_TASK,
-                    payload: {task, time, completed}
+                    payload: {task, time, completed, _id}
                 });
 
             }).catch(e => console.log('Error: ****',e));

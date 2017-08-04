@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field, reset } from 'redux-form'
-import shortid from 'shortid'
 
 import { addTask } from '../actions'
 
@@ -18,9 +17,8 @@ const renderInput = field =>
 class TasksList extends Component {
   handleFormSubmit({ task, time }) {
     let completed = false
-    let id = shortid.generate()
     let notes = ''
-    this.props.addTask({ task, time, completed, id, notes })
+    this.props.addTask({ task, time, completed, notes })
     this.props.dispatch(reset('tasksList'))
   }
 

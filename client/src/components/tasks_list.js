@@ -5,6 +5,11 @@ import shortid from 'shortid'
 import * as actions from '../actions'
 
 class TasksList extends Component {
+
+  componentWillMount() {
+    this.props.getTasks();
+  }
+
   convertTime(time) {
     if (!time) return time
 
@@ -22,6 +27,7 @@ class TasksList extends Component {
   }
 
   renderTasksList() {
+    console.log(this.props.tasks)
     return this.props.tasks
       .sort((a, b) => a.time > b.time)
       .map(tasks =>
