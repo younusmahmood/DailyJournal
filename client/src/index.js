@@ -12,8 +12,6 @@ import App from './components/App'
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
-
-
 ReactDOM.render(
   <Provider store={store}>
     <Router>

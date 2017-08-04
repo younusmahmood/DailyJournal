@@ -4,13 +4,12 @@ import { ADD_TASK, COMPLETE_TASK, DELETE_TASK, GET_TASKS } from '../actions/type
 export default function(state = [], action) {
   switch (action.type) {
     case ADD_TASK:
-    console.log(state);
       return [...state, { ...action.payload }]
     case GET_TASKS:
       return [...state, ...action.payload]
     case COMPLETE_TASK:
-      var index = _.findIndex(state, { id: action.payload })
-      state[index].completed = !state[index].completed
+      var index = _.findIndex(state, { _id: action.payload._id })
+      state[index].completed = action.payload.completed
       var newState = [...state]
       return newState
     case DELETE_TASK:

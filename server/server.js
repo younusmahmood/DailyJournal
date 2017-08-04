@@ -1,6 +1,9 @@
+const _ = require('lodash')
 const express = require('express');
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const { ObjectID } = require('mongodb');
+const fs = require('fs');
 
 var { mongoose } = require('./db/mongoose');
 var { TaskList } = require('./models/taskList');
@@ -30,6 +33,30 @@ app.get('/taskslist', (req, res) => {
     })
 })
 
+app.patch('/taskslist/:id', (req, res) => {
+    var id = req.params.id;
+    var body = _.pick(req.body, ["completed"]);
+    if(!ObjectID.isValid(id)) {
+        res.status(404).send()
+    }
+
+    if(_.isBoolean(body.completed)){
+        if(body.completed){
+            body.completed = false;
+        } else if(!body.completed){
+            body.completed = true;
+        }
+    }
+    
+    TaskList.findByIdAndUpdate(id, { $set: body }, { new: true })
+      .then(task => {
+        if (!task) {
+          return res.status(404).send();
+        }
+        res.send({task});
+      })
+      .catch(e => res.status(400).send());
+})
 
 app.listen(port, () => {
     console.log(`Started on port ${port}`);

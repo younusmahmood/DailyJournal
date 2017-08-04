@@ -25,7 +25,6 @@ export function addTask({ task, time, completed, id, notes }) {
 
             }).catch(e => console.log('Error: ****',e));
     }
-
 }
 
 export function getTasks() {
@@ -40,10 +39,17 @@ export function getTasks() {
     }
 }
 
-export function completeTask(id) {
-    return {
-        type: COMPLETE_TASK,
-        payload: id
+export function completeTask(id, completed) {
+    return function(dispatch) {
+        axios.patch(`${ROOT_URL}/taskslist/${id}`, {"completed" : completed})
+            .then((res) => {
+                var _id = res.data.task._id
+                var completed = res.data.task.completed;
+                dispatch({
+                    type: COMPLETE_TASK, 
+                    payload: {_id , completed } 
+                });
+            })
     }
 }
 
