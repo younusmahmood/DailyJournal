@@ -7,7 +7,8 @@ import {
   GET_TASKS
 } from './types'
 
-const ROOT_URL = 'http://localhost:3000'
+const ROOT_URL =
+  'https://my-daily-journal-api.herokuapp.com' || 'http://localhost:3000'
 
 export function addTask({ task, time, completed, notes }) {
   return function(dispatch) {
