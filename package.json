@@ -30,6 +30,9 @@
     "eject": "react-scripts eject",
     "precommit": "lint-staged"
   },
+  "engines": {
+    "node": "8.2.1"
+  },
   "lint-staged": {
     "*.js": [
       "node_modules/.bin/prettier --single-quote --no-semi --write",
