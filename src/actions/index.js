@@ -4,16 +4,22 @@ import {
   COMPLETE_TASK,
   DELETE_TASK,
   CREATE_JOURNAL,
-  GET_TASKS
+  GET_TASKS,
+  AUTH_USER
 } from './types'
 
-const ROOT_URL =
-  'https://my-daily-journal-api.herokuapp.com' || 'http://localhost:3000'
+const ROOT_URL = 'http://localhost:3000'
+
+//const ROOT_URL = 'https://my-daily-journal-api.herokuapp.com' || 'http://localhost:3000'
 
 export function addTask({ task, time, completed, notes }) {
   return function(dispatch) {
     axios
-      .post(`${ROOT_URL}/taskslist`, { task, time })
+      .post(
+        `${ROOT_URL}/taskslist`,
+        { task, time },
+        { headers: { 'x-auth': localStorage.getItem('x-auth') } }
+      )
       .then(res => {
         task = res.data.task
         time = res.data.time
@@ -32,12 +38,11 @@ export function addTask({ task, time, completed, notes }) {
 export function getTasks() {
   return function(dispatch) {
     axios
-      .get(`${ROOT_URL}/taskslist`)
+      .get(`${ROOT_URL}/taskslist`, {
+        headers: { 'x-auth': localStorage.getItem('x-auth') }
+      })
       .then(res => {
-        dispatch({
-          type: GET_TASKS,
-          payload: res.data.tasks
-        })
+        dispatch({ type: GET_TASKS, payload: res.data.tasks })
       })
       .catch(e => console.log('Error: ****', e))
   }
@@ -46,27 +51,29 @@ export function getTasks() {
 export function completeTask(id, completed) {
   return function(dispatch) {
     axios
-      .patch(`${ROOT_URL}/taskslist/${id}`, { completed: completed })
+      .patch(
+        `${ROOT_URL}/taskslist/${id}`,
+        { completed: completed },
+        { headers: { 'x-auth': localStorage.getItem('x-auth') } }
+      )
       .then(res => {
         var _id = res.data.task._id
         var completed = res.data.task.completed
-        dispatch({
-          type: COMPLETE_TASK,
-          payload: { _id, completed }
-        })
+        dispatch({ type: COMPLETE_TASK, payload: { _id, completed } })
       })
   }
 }
 
 export function deleteTask(id) {
   return function(dispatch) {
-    axios.delete(`${ROOT_URL}/taskslist/${id}`).then(res => {
-      var _id = res.data.task._id
-      dispatch({
-        type: DELETE_TASK,
-        payload: _id
+    axios
+      .delete(`${ROOT_URL}/taskslist/${id}`, {
+        headers: { 'x-auth': localStorage.getItem('x-auth') }
       })
-    })
+      .then(res => {
+        var _id = res.data.task._id
+        dispatch({ type: DELETE_TASK, payload: _id })
+      })
   }
 }
 
@@ -74,5 +81,23 @@ export function createJournal({ id, title }) {
   return {
     type: CREATE_JOURNAL,
     payload: { id, title }
+  }
+}
+
+export function login({ email, password }) {
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/users/login`, { email, password }).then(res => {
+      dispatch({ type: AUTH_USER })
+      localStorage.setItem('x-auth', res.headers['x-auth'])
+    })
+  }
+}
+
+export function signup({ email, password }) {
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/users`, { email, password }).then(res => {
+      dispatch({ type: AUTH_USER })
+      localStorage.setItem('x-auth', res.headers['x-auth'])
+    })
   }
 }

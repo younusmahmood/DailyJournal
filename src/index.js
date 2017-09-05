@@ -8,6 +8,9 @@ import reduxThunk from 'redux-thunk'
 import reducers from './reducers'
 
 import App from './components/App'
+import Home from './components/home'
+import UserIndex from './components/userIndex'
+import Signup from './components/signup'
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
 const store = createStoreWithMiddleware(reducers)
@@ -18,8 +21,9 @@ ReactDOM.render(
       <div>
         <Switch>
           <Route path="/tasks" component={App} />
-          <Route path="/:id" component={App} />
-          <Route path="/" component={App} />
+          <Route path="/userIndex" component={UserIndex} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/" component={Home} />
         </Switch>
       </div>
     </Router>
