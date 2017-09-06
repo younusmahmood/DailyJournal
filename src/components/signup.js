@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
 import { signup } from '../actions'
 
@@ -22,7 +23,7 @@ const renderInput = field =>
 
 class Signup extends Component {
   handleFormSubmit({ email, password }) {
-    this.props.signup({ email, password })
+    this.props.signup(this.props.history, { email, password })
   }
 
   render() {
@@ -68,4 +69,4 @@ function validate(formProps) {
 
 Signup = reduxForm({ form: 'signup', validate })(Signup)
 
-export default connect(null, { signup })(Signup)
+export default withRouter(connect(null, { signup })(Signup))

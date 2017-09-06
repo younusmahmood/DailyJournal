@@ -84,20 +84,22 @@ export function createJournal({ id, title }) {
   }
 }
 
-export function login({ email, password }) {
+export function login(history, { email, password }) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/users/login`, { email, password }).then(res => {
       dispatch({ type: AUTH_USER })
       localStorage.setItem('x-auth', res.headers['x-auth'])
+      history.push('/tasks')
     })
   }
 }
 
-export function signup({ email, password }) {
+export function signup(history, { email, password }) {
   return function(dispatch) {
     axios.post(`${ROOT_URL}/users`, { email, password }).then(res => {
       dispatch({ type: AUTH_USER })
       localStorage.setItem('x-auth', res.headers['x-auth'])
+      history.push('/tasks')
     })
   }
 }
