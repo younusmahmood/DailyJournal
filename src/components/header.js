@@ -1,10 +1,32 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
+
+import { logout } from '../actions'
+import LoginModal from './login_modal'
+import SignupModal from './signup_modal'
 
 class Header extends Component {
+  constructor(props) {
+    super(props)
+
+    this.logout = this.logout.bind(this)
+  }
+
+  logout() {
+    this.props.logout(() => {
+      this.props.history.push('/')
+    })
+  }
+
   render() {
+    var className = 'navbar navbar-toggleable-md navbar-inverse bg-inverse'
+    if (this.props.location.pathname === '/') {
+      className += ' homeNav'
+    }
     return (
-      <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+      <nav className={className}>
         <button
           className="navbar-toggler navbar-toggler-right"
           type="button"
@@ -16,9 +38,9 @@ class Header extends Component {
         >
           <span className="navbar-toggler-icon" />
         </button>
-        <a className="navbar-brand" href="#">
+        <Link to={'/'} className="navbar-brand">
           My Daily Journal
-        </a>
+        </Link>
         <div
           className="collapse navbar-collapse justify-content-end"
           id="navbarNavDropdown"
@@ -26,15 +48,17 @@ class Header extends Component {
           {this.props.authenticated
             ? <ul className="navbar-nav" id="main-nav">
                 <li className="nav-item">
-                  <a className="nav-link">Logout</a>
+                  <button onClick={this.logout} className="nav-link">
+                    Logout
+                  </button>
                 </li>
               </ul>
             : <ul className="navbar-nav" id="main-nav">
-                <li className="nav-item">
-                  <a className="nav-link">Login</a>
+                <li className="nav-item nav-link">
+                  <LoginModal />
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link">Signup</a>
+                <li className="nav-item nav-link">
+                  <SignupModal />
                 </li>
               </ul>}
         </div>
@@ -47,4 +71,4 @@ function mapStateToProps(state) {
   return { authenticated: state.auth.authenticated }
 }
 
-export default connect(mapStateToProps)(Header)
+export default withRouter(connect(mapStateToProps, { logout })(Header))

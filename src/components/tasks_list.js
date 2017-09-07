@@ -79,7 +79,7 @@ class TasksList extends Component {
         <div className="row" id="textarea">
           <div className="col-sm-8 offset-sm-2">
             <label htmlFor="textarea">Notes:</label>
-            <textarea className="form-control" rows="10" />
+            <textarea className="form-control faded" rows="10" />
           </div>
         </div>
       </div>

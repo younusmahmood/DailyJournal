@@ -3,7 +3,8 @@ import {
   ADD_TASK,
   COMPLETE_TASK,
   DELETE_TASK,
-  GET_TASKS
+  GET_TASKS,
+  USER_LOGOUT
 } from '../actions/types'
 
 export default function(state = [], action) {
@@ -22,6 +23,8 @@ export default function(state = [], action) {
       state.splice(index, 1)
       newState = [...state]
       return newState
+    case USER_LOGOUT:
+      return (state = [])
     default:
       return state
   }

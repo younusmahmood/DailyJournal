@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import TasksLists from './tasks_list'
 import TaskForm from './task_form'
+import Header from './header'
 import * as actions from '../actions'
 
 function getDate() {
@@ -17,11 +18,14 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h3 className="heading">
+        <Header />
+        <h5 className="heading">
           {getDate()}
-        </h3>
-        <TaskForm />
-        <TasksLists />
+        </h5>
+        <div className="container-padded">
+          <TaskForm />
+          <TasksLists />
+        </div>
       </div>
     )
   }

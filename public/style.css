@@ -1,14 +1,16 @@
 .heading {
-    font-size: 4rem;
+    font-size: 3rem;
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     padding-bottom: 20px;
     padding-top: 5px;
+    padding-left: 15px;
 }
 
 body {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 400;
+    background: url('./vintage-concrete.png') center center;
 }
 
 .journals {
@@ -67,6 +69,11 @@ body {
   padding: 0px !important;
 }
 
+.container-padded { 
+  padding-right: 15px; 
+  padding-left: 85px;
+}
+
 /* Buttons */
 .btn-lg{
     background-color: transparent;
@@ -86,17 +93,19 @@ body {
 }
 
 /* Header */
-.navbar{
-    background-color: transparent !important;
+.homeNav{
+    background: transparent !important;
 }
 
-#main-nav li a {
-    border-bottom: 1px solid transparent;
-    transition: 0.5s;
+
+#main-nav li button {
+    border: 1px solid transparent;
+    background-color: transparent;
+    transition: 0.7s;
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 200;
     font-size: 1.2rem;
-
+    color: #989898 !important;
 }
 
 .navbar-brand{
@@ -109,10 +118,20 @@ body {
 
 .navbar-brand:hover{
     color: white !important;
-    transition: 0.5s;
+    transition: 0.7s;
 }
 
-#main-nav li a:hover {
+#main-nav li button:hover {
     border-bottom: 1px solid gold;
     transition: 0.5s;
+    color: white !important;
+}
+
+.faded{
+    background-color: transparent;
+}
+
+.faded:focus{
+    background-color:transparent !important;
+    border-color: black;
 }

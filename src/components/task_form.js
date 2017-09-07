@@ -6,7 +6,7 @@ import { addTask } from '../actions'
 
 const renderInput = field =>
   <div>
-    <input {...field.input} type={field.type} className="form-control" />
+    <input {...field.input} type={field.type} className="form-control faded" />
     {field.meta.touched &&
       field.meta.error &&
       <div className="error">

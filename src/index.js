@@ -10,8 +10,6 @@ import { AUTH_USER } from './actions/types'
 
 import App from './components/App'
 import Home from './components/home'
-import UserIndex from './components/userIndex'
-import Signup from './components/signup'
 import RequireAuth from './components/require_auth'
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore)
@@ -31,8 +29,6 @@ ReactDOM.render(
       <div>
         <Switch>
           <Route path="/tasks" component={RequireAuth(App)} />
-          <Route path="/userIndex" component={UserIndex} />
-          <Route path="/signup" component={Signup} />
           <Route path="/" component={Home} />
         </Switch>
       </div>

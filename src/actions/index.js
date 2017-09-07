@@ -5,7 +5,10 @@ import {
   DELETE_TASK,
   CREATE_JOURNAL,
   GET_TASKS,
-  AUTH_USER
+  AUTH_USER,
+  UNAUTH_USER,
+  USER_LOGOUT,
+  AUTH_ERROR
 } from './types'
 
 const ROOT_URL = 'http://localhost:3000'
@@ -84,22 +87,50 @@ export function createJournal({ id, title }) {
   }
 }
 
-export function login(history, { email, password }) {
+export function login({ email, password }, callback) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/users/login`, { email, password }).then(res => {
-      dispatch({ type: AUTH_USER })
-      localStorage.setItem('x-auth', res.headers['x-auth'])
-      history.push('/tasks')
-    })
+    axios
+      .post(`${ROOT_URL}/users/login`, { email, password })
+      .then(res => {
+        dispatch({ type: AUTH_USER })
+        localStorage.setItem('x-auth', res.headers['x-auth'])
+        callback()
+      })
+      .catch(e => {
+        dispatch({ type: AUTH_ERROR, payload: e.response.data })
+      })
   }
 }
 
-export function signup(history, { email, password }) {
+export function signup({ email, password }, callback) {
   return function(dispatch) {
-    axios.post(`${ROOT_URL}/users`, { email, password }).then(res => {
-      dispatch({ type: AUTH_USER })
-      localStorage.setItem('x-auth', res.headers['x-auth'])
-      history.push('/tasks')
-    })
+    axios
+      .post(`${ROOT_URL}/users`, { email, password })
+      .then(res => {
+        dispatch({ type: AUTH_USER })
+        localStorage.setItem('x-auth', res.headers['x-auth'])
+        callback()
+      })
+      .catch(e => {
+        dispatch({ type: AUTH_ERROR, payload: e.response.data })
+      })
+  }
+}
+
+export function logout(callback) {
+  return function(dispatch) {
+    axios
+      .delete(`${ROOT_URL}/users/me/token`, {
+        headers: { 'x-auth': localStorage.getItem('x-auth') }
+      })
+      .then(res => {
+        dispatch({ type: UNAUTH_USER })
+        dispatch({ type: USER_LOGOUT })
+        localStorage.removeItem('x-auth', res.headers['x-auth'])
+        callback()
+      })
+      .catch(e => {
+        dispatch({ type: AUTH_ERROR, payload: e.response.data })
+      })
   }
 }

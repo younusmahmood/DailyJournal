@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
-import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 import { login } from '../actions'
@@ -23,7 +22,19 @@ const renderInput = field =>
 
 class Login extends Component {
   handleFormSubmit({ email, password }) {
-    this.props.login(this.props.history, { email, password })
+    this.props.login({ email, password }, () => {
+      this.props.history.push('/tasks')
+    })
+  }
+
+  renderAlert() {
+    if (this.props.errorMessage) {
+      return (
+        <div className="alert alert-danger">
+          <strong>Oops!</strong> {this.props.errorMessage}
+        </div>
+      )
+    }
   }
 
   render() {
@@ -47,9 +58,7 @@ class Login extends Component {
             <button action="submit" className="btn btn-outline-primary">
               Login
             </button>
-            <p>
-              Don't have an account? <Link to={'/signup'}>Signup</Link>!
-            </p>
+            {this.renderAlert()}
           </div>
         </div>
       </form>
@@ -69,4 +78,8 @@ function validate(formProps) {
 
 Login = reduxForm({ form: 'login', validate })(Login)
 
-export default withRouter(connect(null, { login })(Login))
+function mapStateToProps(state) {
+  return { errorMessage: state.auth.error }
+}
+
+export default withRouter(connect(mapStateToProps, { login })(Login))

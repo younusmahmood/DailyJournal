@@ -1,9 +1,22 @@
 import React, { Component } from 'react'
 
-import Login from './login'
+//import Login from './login'
 import Header from './header'
+//import Modal from './modal'
 
 class Home extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { isOpen: false }
+  }
+
+  toggleModal = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    })
+  }
+
   render() {
     return (
       <section id="cover">
