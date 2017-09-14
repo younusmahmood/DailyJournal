@@ -8,18 +8,20 @@ import {
   AUTH_USER,
   UNAUTH_USER,
   USER_LOGOUT,
-  AUTH_ERROR
+  AUTH_ERROR,
+  GET_JOURNALS,
+  CLEAR
 } from './types'
 
 const ROOT_URL = 'http://localhost:3000'
 
 //const ROOT_URL = 'https://my-daily-journal-api.herokuapp.com'
 
-export function addTask({ task, time, completed, notes }) {
+export function addTask({ task, time, completed, id }) {
   return function(dispatch) {
     axios
       .post(
-        `${ROOT_URL}/taskslist`,
+        `${ROOT_URL}/taskslist/${id}`,
         { task, time },
         { headers: { 'x-auth': localStorage.getItem('x-auth') } }
       )
@@ -38,10 +40,10 @@ export function addTask({ task, time, completed, notes }) {
   }
 }
 
-export function getTasks() {
+export function getTasks(id) {
   return function(dispatch) {
     axios
-      .get(`${ROOT_URL}/taskslist`, {
+      .get(`${ROOT_URL}/taskslist/${id}`, {
         headers: { 'x-auth': localStorage.getItem('x-auth') }
       })
       .then(res => {
@@ -80,10 +82,38 @@ export function deleteTask(id) {
   }
 }
 
-export function createJournal({ id, title }) {
-  return {
-    type: CREATE_JOURNAL,
-    payload: { id, title }
+export function createJournal({ title }) {
+  return function(dispatch) {
+    axios
+      .post(
+        `${ROOT_URL}/journals`,
+        { title },
+        {
+          headers: { 'x-auth': localStorage.getItem('x-auth') }
+        }
+      )
+      .then(res => {
+        var title = res.data.title
+        var _id = res.data._id
+        dispatch({ type: CREATE_JOURNAL, payload: { title, _id } })
+      })
+      .catch(e => console.log('Error: **** A', e))
+  }
+}
+
+export function getJournals() {
+  return function(dispatch) {
+    axios
+      .get(`${ROOT_URL}/journals`, {
+        headers: { 'x-auth': localStorage.getItem('x-auth') }
+      })
+      .then(res => {
+        dispatch({
+          type: GET_JOURNALS,
+          payload: res.data.journals
+        })
+      })
+      .catch(e => console.log('Error: ****', e))
   }
 }
 
@@ -132,5 +162,11 @@ export function logout(callback) {
       .catch(e => {
         dispatch({ type: AUTH_ERROR, payload: e.response.data })
       })
+  }
+}
+
+export function clear() {
+  return {
+    type: CLEAR
   }
 }

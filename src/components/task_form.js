@@ -16,9 +16,9 @@ const renderInput = field =>
 
 class TasksList extends Component {
   handleFormSubmit({ task, time }) {
+    var id = this.props.id
     let completed = false
-    let notes = ''
-    this.props.addTask({ task, time, completed, notes })
+    this.props.addTask({ task, time, completed, id })
     this.props.dispatch(reset('tasksList'))
   }
 

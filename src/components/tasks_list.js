@@ -3,10 +3,15 @@ import { connect } from 'react-redux'
 import shortid from 'shortid'
 
 import * as actions from '../actions'
+import Notes from './notes'
 
 class TasksList extends Component {
   componentWillMount() {
-    this.props.getTasks()
+    this.props.getTasks(this.props.id)
+  }
+
+  componentWillUnmount() {
+    this.props.clear()
   }
 
   convertTime(time) {
@@ -26,7 +31,6 @@ class TasksList extends Component {
   }
 
   renderTasksList() {
-    console.log(this.props.tasks)
     return this.props.tasks.sort((a, b) => a.time > b.time).map(tasks =>
       <div key={shortid.generate()}>
         <div className="row">
@@ -75,13 +79,7 @@ class TasksList extends Component {
     return (
       <div className="list-group" id="tasks">
         {this.renderTasksList()}
-
-        <div className="row" id="textarea">
-          <div className="col-sm-8 offset-sm-2">
-            <label htmlFor="textarea">Notes:</label>
-            <textarea className="form-control faded" rows="10" />
-          </div>
-        </div>
+        <Notes />
       </div>
     )
   }

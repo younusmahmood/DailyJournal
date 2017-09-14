@@ -23,7 +23,7 @@ const renderInput = field =>
 class Login extends Component {
   handleFormSubmit({ email, password }) {
     this.props.login({ email, password }, () => {
-      this.props.history.push('/tasks')
+      this.props.history.push('/journals')
     })
   }
 
@@ -41,6 +41,7 @@ class Login extends Component {
     const { handleSubmit } = this.props
     return (
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+        <div className="whiteHeader">Login</div>
         <div className="row">
           <div>
             <Field

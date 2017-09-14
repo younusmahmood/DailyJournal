@@ -23,7 +23,7 @@ const renderInput = field =>
 class Signup extends Component {
   handleFormSubmit({ email, password }) {
     this.props.signup({ email, password }, () => {
-      this.props.history.push('/tasks')
+      this.props.history.push('/journals')
     })
   }
 

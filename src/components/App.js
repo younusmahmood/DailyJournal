@@ -1,5 +1,7 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import randomQuote from 'random-quote'
 
 import TasksLists from './tasks_list'
 import TaskForm from './task_form'
@@ -16,6 +18,7 @@ function getDate() {
 
 class App extends Component {
   render() {
+    var id = _.trim(this.props.location.pathname, '/tasks/')
     return (
       <div>
         <Header />
@@ -23,8 +26,8 @@ class App extends Component {
           {getDate()}
         </h5>
         <div className="container-padded">
-          <TaskForm />
-          <TasksLists />
+          <TaskForm id={id} />
+          <TasksLists id={id} />
         </div>
       </div>
     )

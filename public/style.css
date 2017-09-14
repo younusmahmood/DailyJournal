@@ -135,3 +135,45 @@ body {
     background-color:transparent !important;
     border-color: black;
 }
+
+.whiteHeader{
+    color: white;
+}
+
+.list-journal{
+    background-color: transparent !important;
+    color: black;
+}
+
+.list-journal:hover{
+    color: grey;
+}
+
+.list-group{
+    list-style-type: none;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.journals-form{
+    margin-left: 50px;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.btnAddJournal{
+    color: rgba(128, 128, 128, 0.75) !important;
+    border-color: rgba(128, 128, 128, 0.75) ;
+}
+
+.btnAddJournal:hover{
+    color: black !important;
+    background-color: transparent !important;
+    border-color:black;
+}
+
+
+.btnAddJournal:active:focus,
+.btnAddJournal:focus {
+  box-shadow: none  !important;
+}

@@ -4,7 +4,8 @@ import {
   COMPLETE_TASK,
   DELETE_TASK,
   GET_TASKS,
-  USER_LOGOUT
+  USER_LOGOUT,
+  CLEAR
 } from '../actions/types'
 
 export default function(state = [], action) {
@@ -24,6 +25,8 @@ export default function(state = [], action) {
       newState = [...state]
       return newState
     case USER_LOGOUT:
+      return (state = [])
+    case CLEAR:
       return (state = [])
     default:
       return state
