@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-
-import * as actions from '../actions'
+import _ from 'lodash'
 
 class Notes extends Component {
+  constructor(props) {
+    super(props)
+  }
   render() {
-    console.log(this.props.notes)
+    var note = _.join(this.props.notes, '')
     return (
       <div className="row" id="textarea">
         <div className="col-sm-8 offset-sm-2">
@@ -13,7 +14,8 @@ class Notes extends Component {
           <textarea
             className="form-control faded"
             rows="10"
-            value={this.props.notes}
+            value={note}
+            onChange
           />
         </div>
       </div>
@@ -21,8 +23,4 @@ class Notes extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { notes: state.tasks.notes }
-}
-
-export default connect(mapStateToProps, actions)(Notes)
+export default Notes

@@ -8,7 +8,10 @@ import Notes from './notes'
 class TasksList extends Component {
   componentWillMount() {
     this.props.getTasks(this.props.id)
+    this.props.getNotes(this.props.id)
   }
+
+  componentDidMount() {}
 
   componentWillUnmount() {
     this.props.clear()
@@ -79,14 +82,16 @@ class TasksList extends Component {
     return (
       <div className="list-group" id="tasks">
         {this.renderTasksList()}
-        <Notes />
+        {this.props.notes
+          ? <Notes notes={this.props.notes} />
+          : console.log('bruh')}
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
-  return { tasks: state.tasks }
+  return { tasks: state.tasks, notes: state.notes }
 }
 
 export default connect(mapStateToProps, actions)(TasksList)
