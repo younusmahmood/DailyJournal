@@ -16,7 +16,8 @@ class Notes extends Component {
   }
 
   loadNotesFromServer() {
-    var url = 'http://localhost:3000'
+    //var url = 'http://localhost:3000'
+    var url = 'https://my-daily-journal-api.herokuapp.com/'
     axios
       .get(`${url}/notes/${this.props.id}`, {
         headers: { 'x-auth': localStorage.getItem('x-auth') }
