@@ -14,9 +14,9 @@ import {
   CLEAR
 } from './types'
 
-const ROOT_URL = 'http://localhost:3000'
+//const ROOT_URL = 'http://localhost:3000'
 
-//const ROOT_URL = 'https://my-daily-journal-api.herokuapp.com'
+const ROOT_URL = 'https://my-daily-journal-api.herokuapp.com'
 
 export function addTask({ task, time, completed, id }) {
   return function(dispatch) {

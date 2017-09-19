@@ -33,7 +33,7 @@ class Journals extends Component {
             </div>
             <div className="col-sm-2">
               <button
-                className="btn btn-outline-danger"
+                className="btn btn-outline-danger btn-delete"
                 onClick={() => this.props.deleteJournal(journal._id.toString())}
               >
                 <span className="fa fa-times-circle-o" aria-hidden="true" />
@@ -50,7 +50,7 @@ class Journals extends Component {
       <div>
         <Header />
         <JournalForm />
-        <ul className="list-group">
+        <ul className="list-group list-group-journal">
           {this.renderJournals()}
         </ul>
       </div>

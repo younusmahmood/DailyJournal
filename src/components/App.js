@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import TasksLists from './tasks_list'
 import TaskForm from './task_form'
@@ -22,8 +23,13 @@ class App extends Component {
       <div>
         <Header />
         <h5 className="heading">
+          <Link to="/journals" className="backlink">
+            <i className="fa fa-arrow-left" aria-hidden="true" />
+          </Link>
           {getDate()}
+          <br />
         </h5>
+
         <div className="container-padded">
           <TaskForm id={id} />
           <TasksLists id={id} />

@@ -27,24 +27,10 @@ class Header extends Component {
     }
     return (
       <nav className={className}>
-        <button
-          className="navbar-toggler navbar-toggler-right"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
         <Link to={'/'} className="navbar-brand">
           My Daily Journal
         </Link>
-        <div
-          className="collapse navbar-collapse justify-content-end"
-          id="navbarNavDropdown"
-        >
+        <div className="justify-content-end" id="navbarNavDropdown">
           {this.props.authenticated
             ? <ul className="navbar-nav" id="main-nav">
                 <li className="nav-item">
