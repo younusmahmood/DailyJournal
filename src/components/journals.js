@@ -12,9 +12,9 @@ class Journals extends Component {
     this.props.getJournals()
   }
 
-  // componentWillUnmount() {
-  //   this.props.clear()
-  // }
+  componentWillUnmount() {
+    this.props.clear()
+  }
 
   renderJournals() {
     return this.props.journals.map(journal => {
@@ -32,11 +32,11 @@ class Journals extends Component {
               </li>
             </div>
             <div className="col-sm-2">
-              <button className="btn btn-outline-danger fa-trash">
-                <span
-                  className="fa fa-times-circle-o fa-2x"
-                  aria-hidden="true"
-                />
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => this.props.deleteJournal(journal._id.toString())}
+              >
+                <span className="fa fa-times-circle-o" aria-hidden="true" />
               </button>
             </div>
           </div>

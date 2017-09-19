@@ -10,6 +10,7 @@ import {
   USER_LOGOUT,
   AUTH_ERROR,
   GET_JOURNALS,
+  DELETE_JOURNAL,
   CLEAR
 } from './types'
 
@@ -92,6 +93,19 @@ export function deleteTask(id) {
       .then(res => {
         var _id = res.data.task._id
         dispatch({ type: DELETE_TASK, payload: _id })
+      })
+  }
+}
+
+export function deleteJournal(id) {
+  return function(dispatch) {
+    axios
+      .delete(`${ROOT_URL}/journal/${id}`, {
+        headers: { 'x-auth': localStorage.getItem('x-auth') }
+      })
+      .then(res => {
+        var _id = res.data.journal._id
+        dispatch({ type: DELETE_JOURNAL, payload: _id })
       })
   }
 }

@@ -48,6 +48,11 @@ class Header extends Component {
           {this.props.authenticated
             ? <ul className="navbar-nav" id="main-nav">
                 <li className="nav-item">
+                  <Link to="/journals" style={{ textDecoration: 'none' }}>
+                    <button className="nav-link">Journals</button>
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <button onClick={this.logout} className="nav-link">
                     Logout
                   </button>

@@ -21,13 +21,8 @@ const renderInput = field =>
 
 class JournalForm extends Component {
   handleFormSubmit({ title }) {
-    console.log('called')
     this.props.createJournal({ title })
     this.props.dispatch(reset('journals'))
-  }
-
-  clicked() {
-    console.log('cliclked')
   }
 
   render() {

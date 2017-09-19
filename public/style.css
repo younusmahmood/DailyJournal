@@ -92,9 +92,6 @@ body {
     border: rgba(0,0,0,0);
 }
 
-.fa-trash{
-    border: none !important; 
-}
 
 /* Header */
 .homeNav{
