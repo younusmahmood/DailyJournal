@@ -1,10 +1,4 @@
-import {
-  CREATE_JOURNAL,
-  GET_JOURNALS,
-  CLEAR,
-  ADD_NOTES
-} from '../actions/types'
-import _ from 'lodash'
+import { CREATE_JOURNAL, GET_JOURNALS, CLEAR } from '../actions/types'
 
 export default function(state = [], action) {
   switch (action.type) {
@@ -13,11 +7,6 @@ export default function(state = [], action) {
       return [...state, { ...action.payload }]
     case GET_JOURNALS:
       return [...state, ...action.payload]
-    case ADD_NOTES:
-      var index = _.findIndex(state, { _id: action.payload._id })
-      state[index].notes = action.payload.notes
-      var newState = [...state]
-      return newState
     case CLEAR:
       return (state = [])
     default:

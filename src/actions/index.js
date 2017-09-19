@@ -10,8 +10,6 @@ import {
   USER_LOGOUT,
   AUTH_ERROR,
   GET_JOURNALS,
-  GET_NOTES,
-  ADD_NOTES,
   CLEAR
 } from './types'
 
@@ -43,21 +41,15 @@ export function addTask({ task, time, completed, id }) {
 }
 
 export function editNote({ text, id }) {
-  return function(dispatch) {
+  return function() {
     axios
       .patch(
         `${ROOT_URL}/journals/notes/${id}`,
         { text },
         { headers: { 'x-auth': localStorage.getItem('x-auth') } }
       )
-      .then(res => {
-        var notes = res.data.notes
-        var _id = res.data._id
-
-        dispatch({
-          type: ADD_NOTES,
-          payload: { notes, _id }
-        })
+      .catch(e => {
+        console.log(e)
       })
   }
 }
@@ -72,20 +64,6 @@ export function getTasks(id) {
         dispatch({ type: GET_TASKS, payload: res.data.tasks })
       })
       .catch(e => console.log('Error: ****', e))
-  }
-}
-
-export function getNotes(id) {
-  return function(dispatch) {
-    axios
-      .get(`${ROOT_URL}/notes/${id}`, {
-        headers: { 'x-auth': localStorage.getItem('x-auth') }
-      })
-      .then(res => {
-        var notes = res.data.notes
-        dispatch({ type: GET_NOTES, payload: { notes } })
-      })
-      .catch(e => console.log('Error: **** NOTES', e))
   }
 }
 
