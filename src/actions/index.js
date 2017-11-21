@@ -14,7 +14,7 @@ import {
   CLEAR
 } from './types'
 
-//const ROOT_URL = 'http://localhost:3000'
+// const ROOT_URL = 'http://localhost:3000'
 
 const ROOT_URL = 'https://my-daily-journal-api.herokuapp.com'
 
@@ -193,6 +193,8 @@ export function logout(callback) {
       })
   }
 }
+
+console.log('a')
 
 export function clear() {
   return {
