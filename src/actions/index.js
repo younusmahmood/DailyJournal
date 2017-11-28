@@ -63,6 +63,7 @@ export function getTasks(id) {
       })
       .then(res => {
         dispatch({ type: GET_TASKS, payload: res.data.tasks })
+        console.log(res.data)
       })
       .catch(e => console.log('Error: ****', e.message))
   }
