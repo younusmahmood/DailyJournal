@@ -62,8 +62,8 @@ export function getTasks(id) {
         headers: { 'x-auth': localStorage.getItem('x-auth') }
       })
       .then(res => {
+        console.log('HIIIIIIIIIIIIIT')
         dispatch({ type: GET_TASKS, payload: res.data.tasks })
-        console.log(res.data)
       })
       .catch(e => console.log('Error: ****', e.message))
   }
