@@ -64,7 +64,7 @@ export function getTasks(id) {
       .then(res => {
         dispatch({ type: GET_TASKS, payload: res.data.tasks })
       })
-      .catch(e => console.log('Error: ****', e))
+      .catch(e => console.log('Error: ****', e.message))
   }
 }
 
@@ -193,8 +193,6 @@ export function logout(callback) {
       })
   }
 }
-
-console.log('a')
 
 export function clear() {
   return {
