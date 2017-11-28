@@ -23,10 +23,11 @@ class Notes extends Component {
         headers: { 'x-auth': localStorage.getItem('x-auth') }
       })
       .then(res => {
-        console.log(res)
         this.setState({ notes: _.join(res.data.notes, '') })
       })
-      .catch(e => console.log('Error: **** NOTES', e))
+      .catch(e =>
+        console.log('Error: **** NOTES', localStorage.getItem('x-auth'))
+      )
   }
 
   componentDidMount() {
