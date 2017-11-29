@@ -56,13 +56,13 @@ export function editNote({ text, id }) {
 }
 
 export function getTasks(id) {
+  console.log(id)
   return function(dispatch) {
     axios
       .get(`${ROOT_URL}/taskslist/${id}`, {
         headers: { 'x-auth': localStorage.getItem('x-auth') }
       })
       .then(res => {
-        console.log('HIIIIIIIIIIIIIT')
         dispatch({ type: GET_TASKS, payload: res.data.tasks })
       })
       .catch(e => console.log('Error: ****', e.message))

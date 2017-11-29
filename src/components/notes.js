@@ -25,9 +25,7 @@ class Notes extends Component {
       .then(res => {
         this.setState({ notes: _.join(res.data.notes, '') })
       })
-      .catch(e =>
-        console.log('Error: **** NOTES', localStorage.getItem('x-auth'))
-      )
+      .catch(e => console.log('Error: **** NOTES', e))
   }
 
   componentDidMount() {
