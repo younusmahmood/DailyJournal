@@ -56,7 +56,7 @@ export function editNote({ text, id }) {
 }
 
 export function getTasks(id) {
-  console.log(id)
+  console.log(typeof id)
   return function(dispatch) {
     axios
       .get(`${ROOT_URL}/taskslist/${id}`, {
