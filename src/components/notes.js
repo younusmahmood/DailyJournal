@@ -8,7 +8,6 @@ import * as actions from '../actions'
 class Notes extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       notes: ''
     }
@@ -16,7 +15,7 @@ class Notes extends Component {
   }
 
   loadNotesFromServer() {
-    //var url = 'http://localhost:3000'
+    // var url = 'http://localhost:3000'
     var url = 'https://my-daily-journal-api.herokuapp.com'
     axios
       .get(`${url}/notes/${this.props.id}`, {
