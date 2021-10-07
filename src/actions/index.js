@@ -20,24 +20,28 @@ const ROOT_URL = 'https://my-daily-journal-api.herokuapp.com'
 
 export function addTask({ task, time, completed, id }) {
   return function(dispatch) {
-    axios
-      .post(
-        `${ROOT_URL}/taskslist/${id}`,
-        { task, time },
-        { headers: { 'x-auth': localStorage.getItem('x-auth') } }
-      )
-      .then(res => {
-        task = res.data.task
-        time = res.data.time
-        completed = res.data.completed
-        var _id = res.data._id
+    dispatch({
+      type: ADD_TASK,
+      payload: { task, time, completed, id }
+    })
+    // axios
+    //   .post(
+    //     `${ROOT_URL}/taskslist/${id}`,
+    //     { task, time },
+    //     { headers: { 'x-auth': localStorage.getItem('x-auth') } }
+    //   )
+    //   .then(res => {
+    //     task = res.data.task
+    //     time = res.data.time
+    //     completed = res.data.completed
+    //     var _id = res.data._id
 
-        dispatch({
-          type: ADD_TASK,
-          payload: { task, time, completed, _id }
-        })
-      })
-      .catch(e => console.log('Error: ****', e))
+    //     dispatch({
+    //       type: ADD_TASK,
+    //       payload: { task, time, completed, _id }
+    //     })
+    //   })
+    //   .catch(e => console.log('Error: ****', e))
   }
 }
 
@@ -71,17 +75,19 @@ export function getTasks(id) {
 
 export function completeTask(id, completed) {
   return function(dispatch) {
-    axios
-      .patch(
-        `${ROOT_URL}/taskslist/${id}`,
-        { completed: completed },
-        { headers: { 'x-auth': localStorage.getItem('x-auth') } }
-      )
-      .then(res => {
-        var _id = res.data.task._id
-        var completed = res.data.task.completed
-        dispatch({ type: COMPLETE_TASK, payload: { _id, completed } })
-      })
+    dispatch({ type: COMPLETE_TASK, payload: { id, completed } })
+
+    // axios
+    //   .patch(
+    //     `${ROOT_URL}/taskslist/${id}`,
+    //     { completed: completed },
+    //     { headers: { 'x-auth': localStorage.getItem('x-auth') } }
+    //   )
+    //   .then(res => {
+    //     var _id = res.data.task._id
+    //     var completed = res.data.task.completed
+    //     dispatch({ type: COMPLETE_TASK, payload: { _id, completed } })
+    //   })
   }
 }
 
@@ -113,21 +119,22 @@ export function deleteJournal(id) {
 
 export function createJournal({ title }) {
   return function(dispatch) {
-    axios
-      .post(
-        `${ROOT_URL}/journals`,
-        { title },
-        {
-          headers: { 'x-auth': localStorage.getItem('x-auth') }
-        }
-      )
-      .then(res => {
-        var title = res.data.title
-        var _id = res.data._id
-        var notes = res.data.notes
-        dispatch({ type: CREATE_JOURNAL, payload: { title, _id, notes } })
-      })
-      .catch(e => console.log('Error: **** A', e))
+    dispatch({ type: CREATE_JOURNAL, payload: { title, id: 10, notes: '' } })
+    // axios
+    //   .post(
+    //     `${ROOT_URL}/journals`,
+    //     { title },
+    //     {
+    //       headers: { 'x-auth': localStorage.getItem('x-auth') }
+    //     }
+    //   )
+    //   .then(res => {
+    //     var title = res.data.title
+    //     var _id = res.data._id
+    //     var notes = res.data.notes
+
+    //   })
+    //   .catch(e => console.log('Error: **** A', e))
   }
 }
 

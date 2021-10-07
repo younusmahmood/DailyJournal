@@ -29,9 +29,9 @@ ReactDOM.render(
     <Router>
       <div>
         <Switch>
-          <Route path="/tasks" component={RequireAuth(App)} />
-          <Route path="/journals" component={RequireAuth(Journals)} />
-          <Route path="/journals/:id" component={RequireAuth(App)} />
+          <Route path="/tasks" component={App} />
+          <Route path="/journals" component={Journals} />
+          <Route path="/journals/:id" component={App} />
           <Route path="/" component={Home} />
         </Switch>
       </div>
